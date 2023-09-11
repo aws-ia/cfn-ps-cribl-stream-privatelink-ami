@@ -528,7 +528,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: Cribl LogStream Leader Shutdown
-      InlineCode: "import boto3\nimport logging\nimport json\nimport time\nimport os\n\nssm = boto3.client('ssm')\nautoscaling = boto3.client('autoscaling')\n\n# Logging\nlog = logging.getLogger()\nlog.setLevel(logging.DEBUG)\n\
+      InlineCode: "import boto3\nimport logging\nimport json\nimport time\nimport os\n\nssm = boto3.client('ssm')\nautoscaling = boto3.client('autoscaling')\n \n# Logging\nlog = logging.getLogger()\nlog.setLevel(logging.DEBUG)\n\
         \ndef handler(event, context):\n  log.debug(\"Received event {}\".format(json.dumps(event)))\n\n  command = ssm.send_command(\n    InstanceIds=[event['detail']['EC2InstanceId'],],\n    DocumentName='AWS-RunShellScript',\n\
         \    Comment='Gracefully terminate Cribl LogStream leader node',\n    Parameters={\"commands\":[\"systemctl disable cribl\",\"systemctl daemon-reload\",\"systemctl stop cribl\"],\"workingDirectory\"\
         :[\"\"],\"executionTimeout\":[\"3600\"]},\n    CloudWatchOutputConfig={\n        'CloudWatchOutputEnabled': True\n    }\n  )\n\n  command_id = command['Command']['CommandId']\n\n  for x in range(0,59):\n\
@@ -673,7 +673,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: Cribl LogStream Worker Shutdown
-      InlineCode: "import boto3\nimport logging\nimport json\nimport time\nimport os\n\nssm = boto3.client('ssm')\nautoscaling = boto3.client('autoscaling')\n\n# Logging\nlog = logging.getLogger()\nlog.setLevel(logging.DEBUG)\n\
+      InlineCode: "import boto3\nimport logging\nimport json\nimport time\nimport os\n\nssm = boto3.client('ssm')\nautoscaling = boto3.client('autoscaling')\n \n# Logging\nlog = logging.getLogger()\nlog.setLevel(logging.DEBUG)\n\
         \ndef handler(event, context):\n  log.debug(\"Received event {}\".format(json.dumps(event)))\n\n  command = ssm.send_command(\n    InstanceIds=[event['detail']['EC2InstanceId'],],\n    DocumentName='AWS-RunShellScript',\n\
         \    Comment='Gracefully terminate Cribl LogStream worker node',\n    Parameters={\"commands\":[\"systemctl disable cribl\",\"systemctl daemon-reload\",\"systemctl stop cribl\"],\"workingDirectory\"\
         :[\"\"],\"executionTimeout\":[\"3600\"]},\n    CloudWatchOutputConfig={\n        'CloudWatchOutputEnabled': True\n    }\n  )\n\n  command_id = command['Command']['CommandId']\n\n  for x in range(0,59):\n\
