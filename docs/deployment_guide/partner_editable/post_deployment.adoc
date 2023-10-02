@@ -1,3 +1,44 @@
 // Include any postdeployment steps here, such as steps necessary to test that the deployment was successful. If there are no postdeployment steps, leave this file empty.
 
 == Postdeployment steps
+
+=== Logging in to the Cribl web console
+
+. Sign in to the https://us-east-1.console.aws.amazon.com/console/home?region=us-east-1#[AWS Management Console^] and open the CloudFormation console.
+. In the left navigation pane, choose *Stacks*.
+. On the *Stacks* page, choose the Cribl stack.
+. Choose the *Outputs* tab. Note the following values:
+** *Cribl Stream web console URL*
+** *Default web access credentials*
+. Navigate to the Cribl Stream web console URL.
+. Enter the user name `admin` and the AMI ID of the Cribl Stream leader instance as the password. Refer to *Default web access credentials* on the *Outputs* tab for this password.
+
+=== Adding other data sources and destinations
+
+You can add data sources, such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3, to the IAM policy that is included with the deployment. You must have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with Stream.
+
+==== Data sources
+
+* https://docs.cribl.io/stream/sources-kinesis-streams/#auto-authentication[Amazon Kinesis^]
+
+* https://docs.cribl.io/stream/sources-sqs#sqs-permissions[Amazon SQS^]
+
+* https://docs.cribl.io/stream/sources-s3#s3-and-sqs-permissions[Amazon S3^]
+
+==== Data destinations
+
+* https://docs.cribl.io/stream/destinations-sqs#sqs-permissions[Amazon SQS^]
+
+* https://docs.cribl.io/stream/destinations-s3#amazon-s3-permissions[Amazon S3^]
+
+== Additional resources
+
+* https://cribl.io/community[Cribl Community^]
+* https://cribl.io/resources[Cribl Resources^]
+* https://docs.cribl.io/docs/deploy-single-instance[Single Instance Deployments^]
+* https://docs.cribl.io/docs/deploy-distributed[Distributed Deployments^]
+* https://docs.cribl.io/docs/scaling[Sizing and Scaling^]
+* https://docs.cribl.io/logstream/usecase-aws-x-account[AWS Cross-Account Data Collection^]
+* https://docs.cnribl.io/logstream/sources[Sources^]
+* https://docs.cribl.io/logstream/destinations[Destinations^]
+* https://cribl.io/integrations/[Integrations^]
